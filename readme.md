@@ -50,3 +50,20 @@ Run the local server and access the url of the project `http://localhost:8000`
 ```shell
 php artisan serve
 ```
+
+## Importing
+To import a new product, you need a `.csv` file with the structure above:
+
+| name      | category     | price   |
+|-----------|--------------|---------|
+| Product 1 | New Category | 500,20  |
+| Product 2 | Eletronics   | 1200,00 |
+| Product 3 | Smartphones  | 999,90  |
+
+Then you can access the application as a *admin user* to import the file on the Products page
+
+Imported products need to be handled by the scheduled job
+```shell
+php artisan schedule:run
+```
+You can put this on a cronjob
