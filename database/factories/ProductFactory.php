@@ -8,6 +8,17 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
 
+    $options=[
+        "ssl"=>array(
+            "verify_peer"=>false,
+            "verify_peer_name"=>false,
+        ),
+    ]; 
+
+    $image = file_get_contents("https://picsum.photos/640/480", false, stream_context_create($options));
+    $image_name = md5(time() . uniqid()) . '.jpg';
+    file_put_contents(storage_path('app/public/uploads/images/' . $image_name), $image);
+
     return [
         'name'        => $faker->text(64),
         'category_id' => function () {
@@ -15,6 +26,6 @@ $factory->define(Product::class, function (Faker $faker) {
         },
         'description' => $faker->paragraph,
         'price'       => $faker->randomFloat(2, 1, 2000),
-        'image_path'  => $faker->image('public/storage/uploads/images', 640, 480, null, false),
+        'image_path'  => $image_name,
     ];
 });
