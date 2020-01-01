@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
+use App\Category;
+use App\Http\Resources\ProductResource;
+use App\Http\Traits\UploadFile;
 use App\Import;
 use App\Product;
-use App\Category;
 use Illuminate\Http\Request;
-use App\Http\Traits\UploadFile;
-use App\Http\Resources\ProductResource;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -16,7 +16,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return ProductResource::collection(Product::with('category')->paginate(6));
+        return ProductResource::collection(Product::with('category')->latest('id')->paginate(10));
     }
 
     function list(Request $request) {
@@ -33,6 +33,8 @@ class ProductController extends Controller
 
     public function show(Request $request, Product $product)
     {
+        $this->authorize('view', $product);
+
         return response()->json([
             'status' => 'success',
             'data'   => $product->load('category'),
@@ -41,6 +43,8 @@ class ProductController extends Controller
 
     public function edit(Request $request, Product $product)
     {
+        $this->authorize('update', $product);
+
         $categories = Category::all();
 
         return response()->json([
@@ -54,6 +58,8 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', $product);
+
         $v = Validator::make($request->all(), [
             'name'        => 'required|string|min:3|max:64|unique:products,name,' . $product->id,
             'price'       => 'required|numeric|min:5',
@@ -99,6 +105,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Product::class);
+
         $v = Validator::make($request->all(), [
             'name'        => 'required|string|min:3|max:64|unique:products,name',
             'price'       => 'required|numeric|min:5',
@@ -140,6 +148,8 @@ class ProductController extends Controller
 
     public function delete(Request $request, Product $product)
     {
+        $this->authorize('delete', $product);
+
         $product->delete();
 
         return response()->json([
@@ -149,6 +159,8 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
+        $this->authorize('import', Product::class);
+
         $v = Validator::make($request->all(), [
             'imported_file' => 'required|file|mimes:csv,txt',
         ]);

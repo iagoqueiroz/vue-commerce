@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Product;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
 {
     use HandlesAuthorization;
-    
+
     /**
      * Determine whether the user can view any products.
      *
@@ -88,6 +88,17 @@ class ProductPolicy
      * @return mixed
      */
     public function forceDelete(User $user, Product $product)
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can import products.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function import(User $user)
     {
         return $user->isAdmin();
     }

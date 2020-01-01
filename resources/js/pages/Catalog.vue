@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="row row-cols-1 row-cols-md-3">
+        <h2 class="header-title"><i class="fas fa-shopping-cart mr-1"></i> Our Products</h2>
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2">
             <div class="col mb-4" v-for="(product, index) in products" :key="index">
                 <div class="card h-100 position-relative">
                     <div class="top-absolute d-flex justify-content-between">
@@ -88,6 +89,31 @@ export default {
 </script>
 
 <style scoped>
+    .header-title {
+        font-size: 17px;
+        font-family: "Roboto", sans-serif;
+        color: #444;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+        margin: 0 0 30px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+        position: relative;
+    }
+
+    .header-title:after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background-color: #666;
+    }
+
     .card img {
         width: 100%;
         max-height: 250px;
@@ -174,8 +200,9 @@ export default {
         cursor: pointer;
     }
 
-    .card .favorite:hover {
+    .card .favorite:hover, .card .favorite:active {
         background-color: #e74c3c;
+        border-color: #e74c3c;
     }
 
     .card .favorite i {
