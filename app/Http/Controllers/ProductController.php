@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Http\Resources\ProductResource;
-use App\Http\Traits\UploadFile;
+use Validator;
 use App\Import;
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
-use Validator;
+use App\Http\Traits\UploadFile;
+use Cache;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
     use UploadFile;
 
-    public function index()
+    public function index(Request $request)
     {
-        return ProductResource::collection(Product::with('category')->latest('id')->paginate(10));
+        $page = $request->input('page', 1);
+
+        $products = Cache::remember('products_list_page_' . $page, 60 * 10, function() {
+            return Product::with('category')->latest('id')->paginate(10);
+        });
+
+        return ProductResource::collection($products);
     }
 
     function list(Request $request) {
