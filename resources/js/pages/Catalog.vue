@@ -8,22 +8,24 @@
                         <div class="favorite">
                             <i class="fas fa-heart"></i>
                         </div>
-                        <div class="price">{{ product.price | toCurrency }}</div>
                     </div>
                     <img :src="'/storage/uploads/images/' + product.image_path" class="card-img-top" alt="">
                     <div class="card-body">
                         <div class="top-section d-flex justify-content-between">
                             <div class="category">{{ product.category.name }}</div>
                             <div class="stars">
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                                 <i class="far fa-star"></i>
                             </div>
                         </div>
                         <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <div class="price">{{ product.price | toCurrency }}</div>
+                        <button class="btn btn-info btn-sm px-4 btn-round"><i class="fas fa-shopping-cart mr-1"></i> Add to Cart</button>
                     </div>
                 </div>
             </div>
@@ -145,8 +147,9 @@ export default {
         font-family: "Raleway", sans-serif;
         font-size: 12px;
         text-transform: uppercase;
-        font-weight: bold;
+        font-weight: normal;
         cursor: pointer;
+        color: #888;
     }
 
     .card .top-section .stars i {
@@ -161,7 +164,10 @@ export default {
 
     .card .card-title {
         font-weight: bold;
-        color: #333;
+        color: #666;
+        text-align: left;
+        font-size: 14px;
+        text-transform: capitalize;
     }
 
     .card .card-text {
@@ -178,12 +184,10 @@ export default {
     }
 
     .card .price {
-        padding: 4px 12px;
-        background-color: #2ecc71;
-        color: #fff;
+        color: #16a085;
         font-weight: bold;
-        border-radius: 20px;
-        margin: 15px;
+        font-size: 16px;
+        letter-spacing: 1px;
     }
 
     .card .favorite {
@@ -210,5 +214,23 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .card .card-footer {
+        border: 0;
+        background: #F6F6F6;
+    }
+
+    .card .card-footer button {
+        background: #f39c12;
+        border-color: #f39c12;
+        color: #fff;
+        font-weight: bold;
+        transition: all .2s ease;
+    }
+
+    .card .card-footer button:hover {
+        background: #e67e22;
+        border-color: #e67e22;
     }
 </style>

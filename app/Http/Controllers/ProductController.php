@@ -17,11 +17,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $page = $request->input('page', 1);
-
-        $products = Cache::remember('products_list_page_' . $page, 60 * 10, function() {
-            return Product::with('category')->latest('id')->paginate(10);
-        });
+        $products = Product::with('category')->latest('id')->paginate(10);
 
         return ProductResource::collection($products);
     }

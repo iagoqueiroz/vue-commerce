@@ -51,9 +51,13 @@
                             </div>
                         </div>
                     </form>
+                    <div class="alert alert-success" v-if="success">
+                        Product created !
+                    </div>
                 </div>
                 <div class="card-footer">
-                    <button @click="submitForm" class="btn btn-success btn float-right px-4">Create</button>
+                    <button @click="submitForm" class="btn btn-success float-right px-4">Create</button>
+                    <router-link :to="{name: 'product.list'}" class="btn btn-link float-right px-4">Back</router-link>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="row justify-content-md-center">
         <div class="col-8">
             <div class="card" v-if="isLoaded">
-                <img :src="'/storage/uploads/images/' + product.image_path" alt="" width="100%" height="auto">
+                <img :src="'/storage/uploads/images/' + product.image_path" alt="" width="100%" height="auto" class="card-img-top view-img">
                 <div class="card-body">
                     <h4 class="card-title">{{ product.name }}</h4>
                     <p class="card-text description">{{ product.description }}</p>
@@ -57,5 +57,10 @@ export default {
     .description {
         font-family: "Raleway", sans-serif;
         line-height: 1.6em;
+    }
+
+    .view-img {
+        max-height: 420px;
+        object-fit: cover;
     }
 </style>

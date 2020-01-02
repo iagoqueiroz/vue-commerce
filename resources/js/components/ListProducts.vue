@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <span class="font-weight-bold">Product List</span>
-                    <input v-model="search" @keyup="searchFetch" type="text" class="form-control col-3 form-control-sm" placeholder="Search...">
+                    <input v-model="search" @keyup="searchFetch" type="text" class="form-control col-3 form-control-sm" placeholder="Search for name...">
                     <div class="buttons d-flex">
                         <import-file></import-file>
                         <router-link :to="{name: 'product.create'}" class="btn btn-sm btn-success ml-3">Create Product</router-link>

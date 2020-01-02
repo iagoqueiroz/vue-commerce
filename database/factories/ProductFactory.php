@@ -8,6 +8,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
 
+    if(!is_dir(storage_path('app/public/uploads/images'))) {
+        \Storage::makeDirectory('public/uploads/images');
+    }
+
     $options=[
         "ssl"=>array(
             "verify_peer"=>false,

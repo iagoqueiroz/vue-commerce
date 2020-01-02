@@ -53,6 +53,7 @@
                 </div>
                 <div class="card-footer">
                     <button @click="submitForm" class="btn btn-success btn float-right px-4">Edit</button>
+                    <router-link :to="{name: 'product.list'}" class="btn btn-link float-right px-4">Back</router-link>
                 </div>
             </div>
         </div>
