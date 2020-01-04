@@ -1,6 +1,7 @@
 # VUE-COMMERCE
 A simple e-commerce project example made with Laravel 5.8 and Vue.js 2
 
+
 ## Installation
 
 ### 1. Step
@@ -17,7 +18,7 @@ npm install
 ```
 
 ### 3. Step
-Create a database of your choice and set the variables in `.env`
+Copy the `.env.example` into `.env` and configure a database of your choice and set the variables in `.env`
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -48,8 +49,9 @@ php artisan migrate --seed
 ### 7. Step
 Run the local server and access the url of the project `http://localhost:8000`
 ```shell
-php artisan serve
+php artisan serve --host=localhost --port=8000
 ```
+
 
 ## Importing
 To import a new product, you need a `.csv` file with the structure above:
@@ -67,3 +69,26 @@ Imported products need to be handled by the scheduled job
 php artisan schedule:run
 ```
 You can put this on a cronjob
+
+
+## Authenticating
+
+**Admin User**
+```
+email: admin@system.com
+password: admin
+```
+
+**Normal User**
+```
+email: user@system.com
+password: user
+```
+
+
+## Testing
+
+If you want to check all the tests, just run:
+```shell
+composer test
+```
