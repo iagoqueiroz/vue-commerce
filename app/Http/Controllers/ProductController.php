@@ -15,6 +15,11 @@ class ProductController extends Controller
 {
     use UploadFile;
 
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+    }
+
     public function index(Request $request)
     {
         $products = Product::with('category')->latest('id')->paginate(10);
